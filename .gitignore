@@ -39,3 +39,8 @@
 
 # debug information files
 *.dwo
+**/ISC WebTracer/bin/
+**/ISC WebTracer/obj/
+ISC WebTracer/Properties/launchSettings.json
+ISC WebTracer/ISC WebTracer.csproj.user
+ISC WebTracer/ISC WebTracer.csproj
