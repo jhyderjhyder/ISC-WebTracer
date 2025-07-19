@@ -269,7 +269,7 @@ namespace ISCWebTracker
 
             LoadRedirectionOptions();
 
-            new WebHostBuilder().UseKestrel().Configure(EatAnything).UseUrls("http://+:" + port).Build().Run();
+            new WebHostBuilder().UseKestrel().Configure(EatAnything).UseUrls("http://*:" + port).Build().Run();
         }
     }
 
