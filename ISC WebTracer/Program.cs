@@ -59,7 +59,7 @@ namespace ISCWebTracker
                 }
                 var method = context.Request.Method;
                 log("Method", method);
-                var path = context.Request.Path;
+                var path = context.Request.Path.ToString();
                 log("EndPoint", path);
                 string body;
                 using (var reader = new StreamReader(context.Request.Body, Encoding.UTF8))
@@ -213,9 +213,27 @@ namespace ISCWebTracker
                 }
                 else
                 {
-                    context.Response.StatusCode = 200;
-                    var bytes = Encoding.UTF8.GetBytes(body, 0, body.Length);
-                    context.Response.Body.Write(bytes);
+                    Boolean makeError = false;
+                    if (path.StartsWith("/error500"))
+                    {
+                        context.Response.StatusCode = 500;
+                        context.Response.WriteAsync("System is Slow today");
+                        makeError = true;
+                    }
+
+                    if (path.StartsWith("/error404"))
+                    {
+                        context.Response.StatusCode = 404;
+                        context.Response.WriteAsync("Account not created");
+                        makeError = true;
+                    }
+
+                    if (makeError == false)
+                    {
+                        context.Response.StatusCode = 200;
+                        var bytes = Encoding.UTF8.GetBytes(body, 0, body.Length);
+                        context.Response.Body.Write(bytes);
+                    }
                 }
 
 
