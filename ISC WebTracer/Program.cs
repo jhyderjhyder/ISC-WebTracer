@@ -60,7 +60,14 @@ namespace ISCWebTracker
                 var method = context.Request.Method;
                 log("Method", method);
                 var path = context.Request.Path.ToString();
-                log("EndPoint", path);
+                var queryString = context.Request.QueryString.Value;
+                log("queryString", queryString);
+                if (queryString == null)
+                {
+                    
+                    queryString = "";
+                }
+                log("EndPoint", path + queryString);
                 string body;
                 using (var reader = new StreamReader(context.Request.Body, Encoding.UTF8))
                 {
